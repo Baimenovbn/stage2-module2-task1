@@ -16,7 +16,7 @@ public class GetUsersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
             req.setAttribute("users", Warehouse.getInstance().getUsers());
-            req.getRequestDispatcher("jsp/users.jsp").forward(req, resp);
+            req.getRequestDispatcher("/users.jsp").forward(req, resp);
         } catch (ServletException | IOException e) {
             e.getLocalizedMessage();
         }
