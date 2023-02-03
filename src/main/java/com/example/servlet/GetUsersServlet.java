@@ -1,6 +1,5 @@
 package com.example.servlet;
 
-import com.example.User;
 import com.example.Warehouse;
 
 import javax.servlet.ServletException;
@@ -16,10 +15,10 @@ public class GetUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            super.doGet(req, resp);
-
-            req.setAttribute("users", new User("Hi", "Hello"));
-            resp.sendRedirect("/users");
-        } catch (ServletException | IOException ignored) {}
+            req.setAttribute("users", Warehouse.getInstance().getUsers());
+            req.getRequestDispatcher("jsp/users.jsp").forward(req, resp);
+        } catch (ServletException | IOException e) {
+            e.getLocalizedMessage();
+        }
     }
 }

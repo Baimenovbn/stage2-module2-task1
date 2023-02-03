@@ -14,19 +14,24 @@ import java.io.IOException;
 public class AddUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        User user = getCreatedUser(req);
+        req.setAttribute("user", user);
+        Warehouse.getInstance().addUser(user);
+
         try {
-            super.doPost(req, resp);
-
-            User user = getCreatedUser(req);
-
-
-            req.setAttribute("user", user);
-
-            Warehouse warehouse = Warehouse.getInstance();
-            warehouse.addUser(user);
-
             resp.sendRedirect("/add");
-        } catch (ServletException | IOException ignored) {}
+        } catch (IOException e) {
+            e.getLocalizedMessage();
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            req.getRequestDispatcher("/add.jsp").forward(req, resp);
+        } catch (IOException | ServletException e) {
+            e.getLocalizedMessage();
+        }
     }
 
     private User getCreatedUser(HttpServletRequest req) {
