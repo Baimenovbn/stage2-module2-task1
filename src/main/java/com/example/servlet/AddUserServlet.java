@@ -28,7 +28,7 @@ public class AddUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         try {
-            req.getRequestDispatcher("/add.jsp").forward(req, resp);
+            req.getRequestDispatcher("jsp/add.jsp").forward(req, resp);
         } catch (IOException | ServletException e) {
             e.getLocalizedMessage();
         }
