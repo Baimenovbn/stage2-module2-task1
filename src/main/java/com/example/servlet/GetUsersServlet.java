@@ -1,5 +1,6 @@
 package com.example.servlet;
 
+import com.example.User;
 import com.example.Warehouse;
 
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ public class GetUsersServlet extends HttpServlet {
         try {
             super.doGet(req, resp);
 
-            req.setAttribute("users", Warehouse.getInstance().getUsers());
+            req.setAttribute("users", new User("Hi", "Hello"));
             resp.sendRedirect("/users");
         } catch (ServletException | IOException ignored) {}
     }
