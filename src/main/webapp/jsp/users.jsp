@@ -6,6 +6,7 @@
 <head>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <title>Get Users</title>
 </head>
 <div style="margin-left:10px; margin-top:5px;">
     <div class="w3-container ">

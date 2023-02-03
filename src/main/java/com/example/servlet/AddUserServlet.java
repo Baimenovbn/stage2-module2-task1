@@ -13,18 +13,20 @@ import java.io.IOException;
 @WebServlet("/add")
 public class AddUserServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            super.doPost(req, resp);
 
-        User user = getCreatedUser(req);
+            User user = getCreatedUser(req);
 
 
-        req.setAttribute("user", user);
+            req.setAttribute("user", user);
 
-        Warehouse warehouse = Warehouse.getInstance();
-        warehouse.addUser(user);
+            Warehouse warehouse = Warehouse.getInstance();
+            warehouse.addUser(user);
 
-        resp.sendRedirect("/add");
+            resp.sendRedirect("/add");
+        } catch (ServletException | IOException ignored) {}
     }
 
     private User getCreatedUser(HttpServletRequest req) {
