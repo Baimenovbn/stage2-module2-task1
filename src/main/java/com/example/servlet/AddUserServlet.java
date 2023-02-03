@@ -1,5 +1,36 @@
 package com.example.servlet;
 
-public class AddUserServlet {
-    //write your code here!
+import com.example.User;
+import com.example.Warehouse;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
+@WebServlet("/add")
+public class AddUserServlet extends HttpServlet {
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPost(req, resp);
+
+        User user = getCreatedUser(req);
+
+
+        req.setAttribute("user", user);
+
+        Warehouse warehouse = Warehouse.getInstance();
+        warehouse.addUser(user);
+
+        resp.sendRedirect("/add");
+    }
+
+    private User getCreatedUser(HttpServletRequest req) {
+        String firstName = req.getParameter("firstName");
+        String lastName = req.getParameter("lastName");
+
+        return new User(firstName, lastName);
+    }
 }
