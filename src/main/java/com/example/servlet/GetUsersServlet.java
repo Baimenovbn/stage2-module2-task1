@@ -2,6 +2,7 @@ package com.example.servlet;
 
 import com.example.Warehouse;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,9 +15,11 @@ public class GetUsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
+        req.setAttribute("users", Warehouse.getInstance().getUsers());
+
+        RequestDispatcher requestDispatcher = req.getRequestDispatcher("jsp/users.jsp");
         try {
-            req.setAttribute("users", Warehouse.getInstance().getUsers());
-            req.getRequestDispatcher("jsp/users.jsp").forward(req, resp);
+            requestDispatcher.forward(req, resp);
         } catch (ServletException | IOException e) {
             e.getLocalizedMessage();
         }
